@@ -114,16 +114,16 @@ A desktop-based Python application that provides a graphical interface for visua
 
    ### 3. Python Code
 
-   import tkinter as tk
-from tkinter import messagebox, filedialog, ttk
-import mysql.connector
-import pandas as pd
-import seaborn as sb
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+    import tkinter as tk
+    from tkinter import messagebox, filedialog, ttk
+    import mysql.connector
+    import pandas as pd
+    import seaborn as sb
+    import matplotlib.pyplot as plt
+    from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-# ---------- Add Sales Record (Optional Utility Function) ----------
-def add_sales_record(product_name, category, quantity, revenue):
+# --- Add Sales Record (Optional Utility Function) ---
+    def add_sales_record(product_name, category, quantity, revenue):
     try:
         conn = mysql.connector.connect(host='localhost', user='root', password='1234', database='sales_prediction')
         cursor = conn.cursor()
@@ -138,11 +138,11 @@ def add_sales_record(product_name, category, quantity, revenue):
         print("Error:", err)
 
 
-# ---------- Graph Viewer Function ----------
-def generate_graph():
-    graph_window = tk.Toplevel()
-    graph_window.title("Graph Viewer")
-    graph_window.geometry("1000x700")
+# --- Graph Viewer Function ---
+    def generate_graph():
+       graph_window = tk.Toplevel()
+       graph_window.title("Graph Viewer")
+       graph_window.geometry("1000x700")
 
     canvas = [None]
     page = [0]
@@ -219,11 +219,11 @@ def generate_graph():
     draw_page(page[0])
 
 
-# ---------- Open Dashboard After Login ----------
-def open_dashboard():
-    dashboard = tk.Toplevel(root)
-    dashboard.title("Dashboard")
-    dashboard.state("zoomed")
+# --- Open Dashboard After Login ---
+    def open_dashboard():
+        dashboard = tk.Toplevel(root)
+        dashboard.title("Dashboard")
+        dashboard.state("zoomed")
 
     db_frame = tk.Frame(dashboard, padx=20, pady=20)
     db_frame.place(relx=0.5, rely=0.4, anchor="center")
@@ -259,11 +259,11 @@ def open_dashboard():
     tk.Button(db_frame, text="Back", command=dashboard.destroy, font="Terminal", width=45).grid(row=1, column=0, columnspan=2, pady=30)
 
 
-# ---------- Signup Function ----------
-def sign_up():
-    signup_window = tk.Toplevel(root)
-    signup_window.title("Signup")
-    signup_window.state("zoomed")
+# ---Signup Function ---
+    def sign_up():
+        signup_window = tk.Toplevel(root)
+        signup_window.title("Signup")
+        signup_window.state("zoomed")
 
     s_frame = tk.Frame(signup_window, bd=5, relief="ridge", padx=40, pady=40)
     s_frame.place(relx=0.5, rely=0.5, anchor="center")
@@ -308,10 +308,10 @@ def sign_up():
     tk.Button(s_frame, text="Signup", command=signup_page, font="Terminal").grid(row=3, column=0, columnspan=2, pady=20)
 
 
-# ---------- Login Function ----------
-def login():
-    username = user_entry.get()
-    password = pword_entry.get()
+# --- Login Function ---
+    def login():
+      username = user_entry.get()
+      password = pword_entry.get()
 
     try:
         conn = mysql.connector.connect(host='localhost', user='root', password='1234', database='sales_prediction')
@@ -329,25 +329,25 @@ def login():
         messagebox.showerror("Database Error", f"Error: {err}")
 
 
-# ---------- Main GUI ----------
-root = tk.Tk()
-root.state("zoomed")
-root.title("Sales Prediction System")
-root.configure(bg="black")
+# --- Main GUI ---
+    root = tk.Tk()
+    root.state("zoomed")
+    root.title("Sales Prediction System")
+    root.configure(bg="black")
+    
+    frame = tk.Frame(root, bd=5, relief="ridge", padx=40, pady=40)
+    frame.place(relx=0.5, rely=0.5, anchor="center")
+    tk.Label(frame, text="Username", font="Terminal").grid(row=0, column=0, padx=10, pady=10)
+    
+    user_entry = tk.Entry(frame, font="Terminal")
+    user_entry.grid(row=0, column=1, padx=10, pady=10)
+    
+    tk.Label(frame, text="Password", font="Terminal").grid(row=1, column=0, padx=10, pady=10)
+    pword_entry = tk.Entry(frame, show='*', font="Terminal")
+    pword_entry.grid(row=1, column=1, padx=10, pady=10)
 
-frame = tk.Frame(root, bd=5, relief="ridge", padx=40, pady=40)
-frame.place(relx=0.5, rely=0.5, anchor="center")
+    tk.Button(frame, text="Login", command=login, font="Terminal").grid(row=2, column=0, padx=10, pady=20)
+    tk.Button(frame, text="Signup", command=sign_up, font="Terminal").grid(row=2, column=1, padx=10, pady=20)
 
-tk.Label(frame, text="Username", font="Terminal").grid(row=0, column=0, padx=10, pady=10)
-user_entry = tk.Entry(frame, font="Terminal")
-user_entry.grid(row=0, column=1, padx=10, pady=10)
-
-tk.Label(frame, text="Password", font="Terminal").grid(row=1, column=0, padx=10, pady=10)
-pword_entry = tk.Entry(frame, show='*', font="Terminal")
-pword_entry.grid(row=1, column=1, padx=10, pady=10)
-
-tk.Button(frame, text="Login", command=login, font="Terminal").grid(row=2, column=0, padx=10, pady=20)
-tk.Button(frame, text="Signup", command=sign_up, font="Terminal").grid(row=2, column=1, padx=10, pady=20)
-
-root.mainloop()
+    root.mainloop()
 
