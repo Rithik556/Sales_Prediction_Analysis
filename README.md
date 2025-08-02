@@ -31,6 +31,31 @@ A desktop-based Python application that provides a graphical interface for visua
 - **Pandas** — Data handling
 - **Matplotlib / Seaborn** — Data visualization
 
+## 🚀 Setup Instructions
+
+### 1. Install Dependencies
+    ```bash
+    pip install pandas seaborn matplotlib mysql-connector-python
+
+### 2. MySQL Database Setup
+
+    CREATE DATABASE sales_prediction;
+
+    CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(50),
+    role VARCHAR(20)
+    );
+    
+    CREATE TABLE sales (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100),
+    category VARCHAR(100),
+    sales_date DATE,
+    quantity_sold INT,
+    revenue FLOAT
+    );
 
 
 
